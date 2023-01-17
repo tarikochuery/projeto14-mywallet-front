@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { LoginForm, LoginStyled, Logo } from "./style";
 import { Input } from '../../components/Input';
 import { Link } from "react-router-dom";
 import { Button } from '../../components/Button';
+import { Logo } from "../../components/Logo";
+import { FormStyled } from "../../styles/FormStyled";
+import { ContainerStyled } from "../../styles/ContainerStyled";
 
 export const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -21,9 +23,9 @@ export const Login = () => {
   };
 
   return (
-    <LoginStyled>
-      <Logo>MyWallet</Logo>
-      <LoginForm onSubmit={handleSubmit}>
+    <ContainerStyled>
+      <Logo />
+      <FormStyled onSubmit={handleSubmit}>
         <Input
           name='E-mail'
           type='email'
@@ -37,11 +39,11 @@ export const Login = () => {
           onChange={(e) => { handleInputChange(e, 'password'); }}
         />
         <Button type='submit'>Entrar</Button>
-      </LoginForm>
+      </FormStyled>
 
-      <Link to='/cadastrar'>
+      <Link to='/cadastro'>
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
-    </LoginStyled>
+    </ContainerStyled>
   );
 };
