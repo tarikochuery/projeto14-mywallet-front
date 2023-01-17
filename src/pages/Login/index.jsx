@@ -23,8 +23,6 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    //TODO: Montar Função para Submit Login
-    console.log(loginData);
     const loginResponse = await login(loginData);
     setLoading(false);
     if (!loginResponse.success) {
