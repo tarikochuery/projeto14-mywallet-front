@@ -31,7 +31,7 @@ export const Login = () => {
       window.alert(loginResponse.error);
       return;
     }
-    console.log(loginResponse.userInfo);
+
     updateUserInfo(loginResponse.userInfo);
     navigate('/home');
   };

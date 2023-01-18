@@ -1,5 +1,10 @@
+import { TransactionButton } from '../../components/TransactionButton';
+
 export const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <TransactionButton type='plus' />
+
+    </div>
   );
 };
