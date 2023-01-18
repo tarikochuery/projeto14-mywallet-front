@@ -11,6 +11,7 @@ export const TransactionListContainer = styled.div`
   text-align: center;
 
   display: flex;
+  flex-grow: 3;
   flex-direction: column;
   align-items: center;
   justify-content: ${props => props.isThereTransactions ? 'space-between' : 'center'};

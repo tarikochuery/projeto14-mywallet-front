@@ -7,6 +7,7 @@ export const HomeContainer = styled.div`
   gap: 1.5rem;
 
   width: 100%;
+  min-height: 95vh;
 `;
 
 export const HomeHeader = styled.div`

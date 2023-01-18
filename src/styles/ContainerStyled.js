@@ -6,6 +6,7 @@ export const ContainerStyled = styled.div`
   align-items: center;
   justify-content: center;
   gap: 3rem;
+  min-height: 100vh;
 
   p {
     color: #fff;

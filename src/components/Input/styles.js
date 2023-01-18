@@ -18,4 +18,8 @@ export const InputStyled = styled.label`
     color: #000;
     opacity: 1;
   }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `;
