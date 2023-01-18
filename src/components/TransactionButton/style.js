@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TransactionButtonStyled = styled.button`
-  width: 15.5rem;
+  width: 15.6rem;
   height: 11.4rem;
   padding: 0.9rem 1rem;
   background-color: #A328D6;
@@ -10,6 +10,7 @@ export const TransactionButtonStyled = styled.button`
   font-size: 1.7rem;
   font-weight: 700;
   border: none;
+  cursor: pointer;
 
 
   display: flex;

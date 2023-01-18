@@ -8,6 +8,7 @@ export const TransactionListContainer = styled.div`
   font-size: 2rem;
   color: #868686;
   border-radius: 0.5rem;
+  text-align: center;
 
   display: flex;
   flex-direction: column;

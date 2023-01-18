@@ -9,7 +9,7 @@ export const UserContext = createContext({
   updateUserInfo(newUserInfo) { }
 });
 
-export const UserProvider = () => {
+export const UserProvider = ({ children }) => {
 
   const [userInfo, setUserInfo] = useState({
     name: '',
@@ -23,7 +23,7 @@ export const UserProvider = () => {
 
   return (
     <UserContext.Provider value={{ userInfo, updateUserInfo }}>
-
+      {children}
     </UserContext.Provider>
   );
 };

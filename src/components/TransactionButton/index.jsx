@@ -8,6 +8,7 @@ export const TransactionButton = ({ type }) => {
       {type === 'plus' &&
         <>
           <AddCircleOutline
+            title={'newIncome'}
             color={'#ffffff'}
             height="25px"
             width="25px"
@@ -18,6 +19,7 @@ export const TransactionButton = ({ type }) => {
       {type === 'minus' &&
         <>
           <RemoveCircleOutline
+            title={'newOutcome'}
             color={'#ffffff'}
             height="25px"
             width="25px"

@@ -1,10 +1,13 @@
 import { AppStyled } from "./style";
-import { Router } from '../../Router';
+import { Router } from '../../Routes/Router';
+import { UserProvider } from "../../providers/UserProvider";
 
 function App() {
   return (
     <AppStyled>
-      <Router />
+      <UserProvider>
+        <Router />
+      </UserProvider>
     </AppStyled>
   );
 }
