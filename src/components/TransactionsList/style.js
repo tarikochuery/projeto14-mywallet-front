@@ -43,5 +43,5 @@ export const BalanceContainer = styled.div`
 `;
 
 export const BalanceValue = styled.p`
-  color : #03AC00;
+  color : ${props => props.isBalancePositive ? '#03AC00' : '#C70000'};
 `;

@@ -3,8 +3,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { UserContext } from "../providers/UserProvider";
 
 export const ProtectedRoute = () => {
-  const { userInfo: { email } } = useContext(UserContext);
-  if (!email) {
+  const { userInfo: { token } } = useContext(UserContext);
+  if (!token) {
     return (
       <Navigate to='/' replace />
     );

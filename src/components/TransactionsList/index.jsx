@@ -1,9 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BalanceContainer, BalanceValue, TransactionListContainer, Transactions } from "./style";
 import { UserContext } from '../../providers/UserProvider';
+import { Transaction } from "../Transaction";
 
 export const TransactionList = () => {
-  const { userInfo: { transactions } } = useContext(UserContext);
+  const { userInfo: { transactions }, updateTransactions } = useContext(UserContext);
+
+  const totalValue = transactions.reduce((sum, transaction) => {
+    const { value, type } = transaction;
+    if (type === 'income') {
+      return sum += value;
+    }
+
+    return sum -= value;
+  }, 0);
+
+  useEffect(() => {
+    updateTransactions();
+  }, []);
 
   return (
     <TransactionListContainer isThereTransactions={transactions.length > 0}>
@@ -15,13 +29,17 @@ export const TransactionList = () => {
         :
         <>
           <Transactions>
-            <p>Transação 1</p>
-            <p>Transação 2</p>
-            <p>Transação 3</p>
+            {transactions.map(
+              (transaction, idx) => <Transaction transaction={transaction} key={idx} />
+            )}
           </Transactions>
           <BalanceContainer>
             <span>SALDO</span>
-            <BalanceValue>valor</BalanceValue>
+            <BalanceValue isBalancePositive={totalValue >= 0}>
+              {Number(totalValue).toLocaleString('pt-br', {
+                minimumFractionDigits: 2
+              })}
+            </BalanceValue>
           </BalanceContainer>
         </>
       }

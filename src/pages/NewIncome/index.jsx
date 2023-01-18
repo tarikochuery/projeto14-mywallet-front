@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { FormStyled } from "../../styles/FormStyled";
 import { NewTransactionContainer } from "../../styles/NewTransactionContainer";
+import { UserContext } from '../../providers/UserProvider';
+import { useNavigate } from "react-router-dom";
 
 export const NewIncome = () => {
+  const navigate = useNavigate();
+  const { updateTransactions, createTransaction } = useContext(UserContext);
   const [incomeData, setIncomeData] = useState({
     value: '',
     description: '',
@@ -15,10 +19,10 @@ export const NewIncome = () => {
     setIncomeData({ ...incomeData, [type]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(incomeData);
-    //TODO: Montar envio de transação para back
+    await createTransaction(incomeData);
+    await updateTransactions();
   };
   return (
     <NewTransactionContainer>
