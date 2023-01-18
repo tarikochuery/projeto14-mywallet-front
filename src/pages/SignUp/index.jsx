@@ -22,7 +22,6 @@ export const SignUp = () => {
   };
 
   const handleSubmit = async (e) => {
-    //TODO: Fazer Lógica de cadastro de usuário
     e.preventDefault();
     const passwordMatch = signUpData.password === signUpData.passwordConfirmation;
     if (!passwordMatch) return window.alert('Senha e confirmação devem ser iguais');

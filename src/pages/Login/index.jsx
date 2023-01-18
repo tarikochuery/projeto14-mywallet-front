@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Input } from '../../components/Input';
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from '../../components/Button';
@@ -6,8 +6,10 @@ import { Logo } from "../../components/Logo";
 import { FormStyled } from "../../styles/FormStyled";
 import { ContainerStyled } from "../../styles/ContainerStyled";
 import { login } from "../../api/login";
+import { UserContext } from "../../providers/UserProvider";
 
 export const Login = () => {
+  const { updateUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
@@ -29,7 +31,8 @@ export const Login = () => {
       window.alert(loginResponse.error);
       return;
     }
-
+    console.log(loginResponse.userInfo);
+    updateUserInfo(loginResponse.userInfo);
     navigate('/home');
   };
 
