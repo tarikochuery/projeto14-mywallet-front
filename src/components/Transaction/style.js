@@ -4,6 +4,7 @@ export const TransactionStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 
   width: 100%;
 `;
@@ -17,6 +18,7 @@ export const DescriptionStyled = styled.p`
   color: #000;
   font-size: 1.6rem;
   width: 100%;
+  text-align: left;
 `;
 
 export const ValueStyled = styled.p`

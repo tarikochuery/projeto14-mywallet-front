@@ -23,6 +23,7 @@ export const NewIncome = () => {
     e.preventDefault();
     await createTransaction(incomeData);
     await updateTransactions();
+    navigate('/home');
   };
   return (
     <NewTransactionContainer>
