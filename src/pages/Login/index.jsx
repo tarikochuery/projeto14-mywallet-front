@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Input } from '../../components/Input';
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from '../../components/Button';
@@ -9,7 +9,7 @@ import { login } from "../../api/login";
 import { UserContext } from "../../providers/UserProvider";
 
 export const Login = () => {
-  const { updateUserInfo } = useContext(UserContext);
+  const { updateUserInfo, userInfo: { token } } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
@@ -35,6 +35,10 @@ export const Login = () => {
     updateUserInfo(loginResponse.userInfo);
     navigate('/home');
   };
+
+  useEffect(() => {
+    if (token) navigate('/home');
+  });
 
   return (
     <ContainerStyled>
