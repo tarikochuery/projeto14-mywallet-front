@@ -10,7 +10,7 @@ export const NewIncome = () => {
   const navigate = useNavigate();
   const { updateTransactions, createTransaction } = useContext(UserContext);
   const [incomeData, setIncomeData] = useState({
-    value: '',
+    value: 0,
     description: '',
     type: 'income'
   });
