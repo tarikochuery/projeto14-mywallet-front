@@ -10,8 +10,8 @@ export const UserContext = createContext({
     transactions: []
   },
   updateUserInfo(newUserInfo) { },
-  updateTransactions() { },
-  createTransaction(transactionData) { }
+  updateTransactions() { return new Promise; },
+  createTransaction(transactionData) { return new Promise(() => { return { success: false, errors: [] }; }); }
 });
 
 export const UserProvider = ({ children }) => {
@@ -32,6 +32,7 @@ export const UserProvider = ({ children }) => {
 
     if (!success) {
       window.alert(errors);
+      return;
     }
     setUserInfo({ ...userInfo, transactions });
   };
