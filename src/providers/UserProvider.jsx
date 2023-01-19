@@ -1,7 +1,7 @@
 import { getTransactions } from "../api/getTransactions";
 import { postTransaction } from "../api/postTransaction";
-
-const { createContext, useState } = require("react");
+import { usePersistedState } from '../hooks/usePersistedState';
+import { createContext } from "react";
 
 export const UserContext = createContext({
   userInfo: {
@@ -16,7 +16,7 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
 
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = usePersistedState({
     name: '',
     token: '',
     transactions: []
