@@ -4,7 +4,7 @@ export const getTransactions = async (token) => {
   try {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/transaction`, {
       headers: {
-        'Authorization': token
+        'Authorization': `Bearer ${token}`
       }
     });
 
