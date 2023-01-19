@@ -21,7 +21,14 @@ export const NewIncome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createTransaction(incomeData);
+    const { success, errors } = await createTransaction(incomeData);
+
+    if (!success) {
+      alert(errors);
+      navigate('/home');
+      return;
+    }
+
     await updateTransactions();
     navigate('/home');
   };

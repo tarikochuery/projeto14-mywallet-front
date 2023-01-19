@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
     name: '',
     token: '',
     transactions: []
-  });
+  }, 'user-info');
 
   const updateUserInfo = (newUserInfo) => {
     const { name, token } = newUserInfo;
@@ -37,7 +37,8 @@ export const UserProvider = ({ children }) => {
   };
 
   const createTransaction = async (transactionData) => {
-    await postTransaction(userInfo.token, transactionData);
+    const res = await postTransaction(userInfo.token, transactionData);
+    return res;
   };
 
   return (

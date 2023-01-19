@@ -21,7 +21,12 @@ export const NewOutcome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createTransaction(outcomeData);
+    const { success, errors } = await createTransaction(outcomeData);
+    if (!success) {
+      alert(errors);
+      navigate('/home');
+      return;
+    }
     await updateTransactions();
     navigate('/home');
   };
