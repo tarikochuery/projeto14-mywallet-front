@@ -1,28 +1,33 @@
 import { useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { UserContext } from "../../providers/UserProvider";
 import { FormStyled } from "../../styles/FormStyled";
 import { NewTransactionContainer } from "../../styles/NewTransactionContainer";
-import { UserContext } from '../../providers/UserProvider';
-import { useNavigate } from "react-router-dom";
 
-export const NewIncome = () => {
+export const UpdateOutcome = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { createTransaction } = useContext(UserContext);
-  const [incomeData, setIncomeData] = useState({
-    value: 0,
-    description: '',
-    type: 'income'
-  });
+  const { updateTransactionByID, userInfo } = useContext(UserContext);
+  const { value, type, description } = userInfo.transactions.find(transaction => transaction.id === id);
+  const [outcomeData, setOutcomeData] = useState(
+    {
+      value: Number(value).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
+      type,
+      description
+    }
+  );
+
+  console.log(outcomeData);
 
   const handleInputChange = (e, type) => {
-    setIncomeData({ ...incomeData, [type]: e.target.value });
+    setOutcomeData({ ...outcomeData, [type]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { success, errors } = await createTransaction(incomeData);
-
+    const { success, errors } = await updateTransactionByID(outcomeData);
     if (!success) {
       alert(errors);
       navigate('/home');
@@ -31,26 +36,26 @@ export const NewIncome = () => {
 
     navigate('/home');
   };
+
   return (
     <NewTransactionContainer>
-      <h3>Nova Entrada</h3>
+      <h3>Editar Saída</h3>
       <FormStyled onSubmit={handleSubmit}>
         <Input
           name='Valor'
-          type='number'
           required={true}
           min={0}
-          value={incomeData.value}
+          value={outcomeData.value}
           onChange={(e) => { handleInputChange(e, 'value'); }}
         />
         <Input
           name='Descrição'
           type='text'
           required={true}
-          value={incomeData.description}
+          value={outcomeData.description}
           onChange={(e) => { handleInputChange(e, 'description'); }}
         />
-        <Button type='submit'>Salvar entrada</Button>
+        <Button type='submit'>Atualizar saída</Button>
       </FormStyled>
     </NewTransactionContainer>
   );

@@ -3,6 +3,7 @@ import { postTransaction } from "../api/postTransaction";
 import { usePersistedState } from '../hooks/usePersistedState';
 import { createContext } from "react";
 import { deleteApiTransaction } from "../api/deleteTransaction";
+import { updateApiTransaction } from "../api/updateTransaction";
 
 export const UserContext = createContext({
   userInfo: {
@@ -14,6 +15,7 @@ export const UserContext = createContext({
   updateTransactions() { return new Promise; },
   createTransaction(transactionData) { return new Promise(() => { return { success: false, errors: [] }; }); },
   deleteTransaction(id) { return new Promise(() => { return { success: false, errors: [] }; }); },
+  updateTransactionByID(id) { return new Promise(() => { return { success: false, errors: [] }; }); }
 });
 
 export const UserProvider = ({ children }) => {
@@ -49,13 +51,19 @@ export const UserProvider = ({ children }) => {
     return res;
   };
 
+  const updateTransactionByID = async (id) => {
+    const res = await updateApiTransaction(id, userInfo.token);
+    return res;
+  };
+
   return (
     <UserContext.Provider value={{
       userInfo,
       updateUserInfo,
       updateTransactions,
       createTransaction,
-      deleteTransaction
+      deleteTransaction,
+      updateTransactionByID
     }}>
       {children}
     </UserContext.Provider>

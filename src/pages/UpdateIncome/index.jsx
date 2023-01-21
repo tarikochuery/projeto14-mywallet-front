@@ -1,19 +1,23 @@
 import { useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { UserContext } from "../../providers/UserProvider";
 import { FormStyled } from "../../styles/FormStyled";
 import { NewTransactionContainer } from "../../styles/NewTransactionContainer";
-import { UserContext } from '../../providers/UserProvider';
-import { useNavigate } from "react-router-dom";
 
-export const NewIncome = () => {
+export const UpdateIncome = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { createTransaction } = useContext(UserContext);
-  const [incomeData, setIncomeData] = useState({
-    value: 0,
-    description: '',
-    type: 'income'
-  });
+  const { updateTransactionByID, userInfo } = useContext(UserContext);
+  const { value, description, type } = userInfo.transactions.find(transaction => id === transaction.id);
+  const [incomeData, setIncomeData] = useState(
+    {
+      value: Number(value).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
+      type,
+      description
+    }
+  );
 
   const handleInputChange = (e, type) => {
     setIncomeData({ ...incomeData, [type]: e.target.value });
@@ -21,7 +25,7 @@ export const NewIncome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { success, errors } = await createTransaction(incomeData);
+    const { success, errors } = await updateTransactionByID(id);
 
     if (!success) {
       alert(errors);
@@ -33,11 +37,10 @@ export const NewIncome = () => {
   };
   return (
     <NewTransactionContainer>
-      <h3>Nova Entrada</h3>
+      <h3>Editar Entrada</h3>
       <FormStyled onSubmit={handleSubmit}>
         <Input
           name='Valor'
-          type='number'
           required={true}
           min={0}
           value={incomeData.value}
@@ -50,7 +53,7 @@ export const NewIncome = () => {
           value={incomeData.description}
           onChange={(e) => { handleInputChange(e, 'description'); }}
         />
-        <Button type='submit'>Salvar entrada</Button>
+        <Button type='submit'>Atualizar entrada</Button>
       </FormStyled>
     </NewTransactionContainer>
   );

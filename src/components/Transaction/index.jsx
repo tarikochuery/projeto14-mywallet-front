@@ -1,23 +1,31 @@
 import { useContext } from 'react';
 import { CloseOutline } from 'react-ionicons';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
 import { DateStyled, TransactionStyled, DescriptionStyled, ValueStyled, DeleteButtonContainer } from './style';
 
 export const Transaction = ({ transaction }) => {
+  const navigate = useNavigate();
   const { date, description, value, type, id } = transaction;
-  const { deleteTransaction, updateTransactions } = useContext(UserContext);
+  const { deleteTransaction, updateTransactions, updateTransactionByID } = useContext(UserContext);
 
   const handleDeleteButton = async () => {
+    const deleteConfirm = window.confirm('Deseja realmente deletar essa transação?');
+
+    if (!deleteConfirm) return;
+
     try {
-      await deleteTransaction(id);
+      const { success, errors } = await deleteTransaction(id);
+      if (!success) return alert(errors);
       await updateTransactions();
     } catch (error) {
-      alert(error.response.data);
+      alert(error.message);
     }
   };
 
   const handleEditButton = () => {
-    console.log('clicou no botão de editar');
+    const redirectURL = type === 'income' ? `/editar-entrada/${id}` : `/editar-saida/${id}`;
+    navigate(redirectURL);
   };
 
   return (

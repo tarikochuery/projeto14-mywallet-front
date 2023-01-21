@@ -5,6 +5,8 @@ import { Home } from '../pages/Home';
 import { ProtectedRoute } from './ProtectedRoute';
 import { NewIncome } from '../pages/NewIncome';
 import { NewOutcome } from '../pages/NewOutcome';
+import { UpdateIncome } from '../pages/UpdateIncome';
+import { UpdateOutcome } from '../pages/UpdateOutcome';
 
 export const Router = () => {
   return (
@@ -16,6 +18,8 @@ export const Router = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/nova-entrada" element={<NewIncome />} />
           <Route path="/nova-saida" element={<NewOutcome />} />
+          <Route path="/editar-entrada/:id" element={<UpdateIncome />} />
+          <Route path="/editar-saida/:id" element={<UpdateOutcome />} />
         </Route>
       </Routes>
     </BrowserRouter>

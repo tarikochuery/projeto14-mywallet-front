@@ -8,7 +8,7 @@ import { NewTransactionContainer } from "../../styles/NewTransactionContainer";
 
 export const NewOutcome = () => {
   const navigate = useNavigate();
-  const { createTransaction, updateTransactions } = useContext(UserContext);
+  const { createTransaction } = useContext(UserContext);
   const [outcomeData, setOutcomeData] = useState({
     value: '',
     description: '',
@@ -27,7 +27,7 @@ export const NewOutcome = () => {
       navigate('/home');
       return;
     }
-    await updateTransactions();
+
     navigate('/home');
   };
 
