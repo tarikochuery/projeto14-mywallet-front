@@ -14,14 +14,29 @@ export const DateStyled = styled.p`
   font-size: 1.6rem;
 `;
 
-export const DescriptionStyled = styled.p`
+export const DescriptionStyled = styled.div`
   color: #000;
   font-size: 1.6rem;
   width: 100%;
   text-align: left;
+
+  p{
+    cursor: pointer;
+    width: fit-content;
+  }
 `;
 
 export const ValueStyled = styled.p`
   color: ${props => props.type === 'income' ? '#03AC00' : '#C70000'};
   font-size: 1.6rem;
+`;
+
+export const DeleteButtonContainer = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
