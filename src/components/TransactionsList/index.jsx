@@ -9,12 +9,6 @@ export const TransactionList = () => {
   const { userInfo: { transactions }, updateTransactions } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  const getNewTransactions = async () => {
-    setLoading(true);
-    await updateTransactions();
-    setLoading(false);
-  };
-
   const totalValue = transactions.reduce((sum, transaction) => {
     const { value, type } = transaction;
     if (type === 'income') {
@@ -25,8 +19,14 @@ export const TransactionList = () => {
   }, 0);
 
   useEffect(() => {
+    const getNewTransactions = async () => {
+      setLoading(true);
+      await updateTransactions();
+      setLoading(false);
+    };
+
     getNewTransactions();
-  }, []);
+  }, [updateTransactions]);
 
   if (loading) {
     return (
