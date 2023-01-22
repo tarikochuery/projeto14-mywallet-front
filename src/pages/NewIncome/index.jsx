@@ -14,6 +14,7 @@ export const NewIncome = () => {
     description: '',
     type: 'income'
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e, type) => {
     setIncomeData({ ...incomeData, [type]: e.target.value });
@@ -21,11 +22,12 @@ export const NewIncome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { success, errors } = await createTransaction(incomeData);
 
     if (!success) {
       alert(errors);
-      navigate('/home');
+      setLoading(false);
       return;
     }
 
@@ -36,6 +38,7 @@ export const NewIncome = () => {
       <h3>Nova Entrada</h3>
       <FormStyled onSubmit={handleSubmit}>
         <Input
+          loading={loading}
           name='Valor'
           type='number'
           required={true}
@@ -44,13 +47,14 @@ export const NewIncome = () => {
           onChange={(e) => { handleInputChange(e, 'value'); }}
         />
         <Input
+          loading={loading}
           name='Descrição'
           type='text'
           required={true}
           value={incomeData.description}
           onChange={(e) => { handleInputChange(e, 'description'); }}
         />
-        <Button type='submit'>Salvar entrada</Button>
+        <Button loading={loading} type='submit'>Salvar entrada</Button>
       </FormStyled>
     </NewTransactionContainer>
   );
