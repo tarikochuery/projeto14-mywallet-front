@@ -26,7 +26,7 @@ export const TransactionList = () => {
     };
 
     getNewTransactions();
-  }, [updateTransactions]);
+  }, []);
 
   if (loading) {
     return (

@@ -1,7 +1,7 @@
 import { getTransactions } from "../api/getTransactions";
 import { postTransaction } from "../api/postTransaction";
 import { usePersistedState } from '../hooks/usePersistedState';
-import { createContext, useCallback } from "react";
+import { createContext } from "react";
 import { deleteApiTransaction } from "../api/deleteTransaction";
 import { updateApiTransaction } from "../api/updateTransaction";
 
@@ -31,17 +31,15 @@ export const UserProvider = ({ children }) => {
     setUserInfo({ ...userInfo, name, token });
   };
 
-  const updateTransactions = useCallback(
-    async () => {
-      const { success, transactions, errors } = await getTransactions(userInfo.token);
+  const updateTransactions = async () => {
+    const { success, transactions, errors } = await getTransactions(userInfo.token);
 
-      if (!success) {
-        window.alert(errors);
-        return;
-      }
-      setUserInfo({ ...userInfo, transactions });
-    },
-    []);
+    if (!success) {
+      window.alert(errors);
+      return;
+    }
+    setUserInfo({ ...userInfo, transactions });
+  };
 
   const createTransaction = async (transactionData) => {
     const res = await postTransaction(userInfo.token, transactionData);
