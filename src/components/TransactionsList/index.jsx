@@ -2,9 +2,18 @@ import { useContext, useEffect } from "react";
 import { BalanceContainer, BalanceValue, TransactionListContainer, Transactions } from "./style";
 import { UserContext } from '../../providers/UserProvider';
 import { Transaction } from "../Transaction";
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 export const TransactionList = () => {
   const { userInfo: { transactions }, updateTransactions } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+
+  const getNewTransactions = async () => {
+    setLoading(true);
+    await updateTransactions();
+    setLoading(false);
+  };
 
   const totalValue = transactions.reduce((sum, transaction) => {
     const { value, type } = transaction;
@@ -16,8 +25,28 @@ export const TransactionList = () => {
   }, 0);
 
   useEffect(() => {
-    updateTransactions();
+    getNewTransactions();
   }, []);
+
+  if (loading) {
+    return (
+      <TransactionListContainer>
+        <Oval
+          height={80}
+          width={80}
+          color="#868686"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          ariaLabel='oval-loading'
+          secondaryColor="#a8a8a8"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+
+        />
+      </TransactionListContainer>
+    );
+  }
 
   return (
     <TransactionListContainer isThereTransactions={transactions.length > 0}>
