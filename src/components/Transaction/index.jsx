@@ -7,7 +7,7 @@ import { DateStyled, TransactionStyled, DescriptionStyled, ValueStyled, DeleteBu
 export const Transaction = ({ transaction, setLoading }) => {
   const navigate = useNavigate();
   const { date, description, value, type, id } = transaction;
-  const { deleteTransaction, updateTransactions, updateTransactionByID } = useContext(UserContext);
+  const { deleteTransaction, updateTransactions } = useContext(UserContext);
 
   const handleDeleteButton = async () => {
     const deleteConfirm = window.confirm('Deseja realmente deletar essa transação?');
