@@ -1,8 +1,8 @@
 import { InputStyled } from "./styles";
 
-export const Input = ({ name, value, onChange, type, required, min }) => {
+export const Input = ({ name, value, onChange, type, required, min, loading }) => {
   return (
-    <InputStyled>
+    <InputStyled loading={loading}>
       <input
         placeholder={name}
         value={value}
@@ -10,6 +10,7 @@ export const Input = ({ name, value, onChange, type, required, min }) => {
         type={type}
         required={required}
         min={min}
+        disabled={loading}
       />
     </InputStyled>
   );

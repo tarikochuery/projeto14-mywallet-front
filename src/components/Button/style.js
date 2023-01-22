@@ -12,4 +12,13 @@ export const ButtonStyled = styled.button`
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled{
+    cursor: progress;
+    opacity: 0.5;
+  }
 `;

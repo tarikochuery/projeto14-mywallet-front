@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InputStyled = styled.label`
-  background-color: #fff;
+  background-color: ${props => props.loading ? '#D4D4D4' : '#fff'};
   width: 100%;
   min-width: 32.6rem;
   padding: 1.7rem 1.5rem;
@@ -12,6 +12,7 @@ export const InputStyled = styled.label`
     color: #000;
     border: none;
     outline: none;
+    background-color: transparent;
   }
 
   input::placeholder{

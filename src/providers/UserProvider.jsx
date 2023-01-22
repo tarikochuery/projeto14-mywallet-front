@@ -51,8 +51,8 @@ export const UserProvider = ({ children }) => {
     return res;
   };
 
-  const updateTransactionByID = async (id) => {
-    const res = await updateApiTransaction(id, userInfo.token);
+  const updateTransactionByID = async (id, transactionInfo) => {
+    const res = await updateApiTransaction(id, transactionInfo, userInfo.token);
     return res;
   };
 

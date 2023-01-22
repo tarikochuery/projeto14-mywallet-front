@@ -43,27 +43,27 @@ export const Login = () => {
   return (
     <ContainerStyled>
       <Logo />
-      {loading ?
-        <p>Carregando...</p>
-        :
-        <FormStyled onSubmit={handleSubmit}>
-          <Input
-            name='E-mail'
-            type='email'
-            value={loginData.email}
-            onChange={(e) => { handleInputChange(e, 'email'); }}
-            required={true}
-          />
-          <Input
-            name='Senha'
-            type='password'
-            value={loginData.password}
-            onChange={(e) => { handleInputChange(e, 'password'); }}
-            required={true}
-          />
-          <Button type='submit'>Entrar</Button>
-        </FormStyled>
-      }
+
+      <FormStyled onSubmit={handleSubmit}>
+        <Input
+          name='E-mail'
+          type='email'
+          value={loginData.email}
+          onChange={(e) => { handleInputChange(e, 'email'); }}
+          required={true}
+          loading={loading}
+        />
+        <Input
+          name='Senha'
+          type='password'
+          value={loginData.password}
+          onChange={(e) => { handleInputChange(e, 'password'); }}
+          required={true}
+          loading={loading}
+        />
+        <Button loading={loading} type='submit'>Entrar</Button>
+      </FormStyled>
+
 
       <Link to='/cadastro'>
         <p>Primeira vez? Cadastre-se!</p>

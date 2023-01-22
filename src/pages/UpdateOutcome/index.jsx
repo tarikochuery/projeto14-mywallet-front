@@ -27,7 +27,7 @@ export const UpdateOutcome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { success, errors } = await updateTransactionByID(outcomeData);
+    const { success, errors } = await updateTransactionByID(id, outcomeData);
     if (!success) {
       alert(errors);
       navigate('/home');

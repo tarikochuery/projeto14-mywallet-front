@@ -25,7 +25,7 @@ export const UpdateIncome = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { success, errors } = await updateTransactionByID(id);
+    const { success, errors } = await updateTransactionByID(id, incomeData);
 
     if (!success) {
       alert(errors);
