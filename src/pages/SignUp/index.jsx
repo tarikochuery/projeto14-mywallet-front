@@ -38,38 +38,37 @@ export const SignUp = () => {
   return (
     <ContainerStyled>
       <Logo />
-
-      {loading ?
-        <p>carregando...</p>
-        :
-        <FormStyled onSubmit={handleSubmit}>
-          <Input
-            name='Nome'
-            onChange={(e) => { handleInputChange(e, 'name'); }}
-            value={signUpData.name}
-            type='text'
-          />
-          <Input
-            name='E-mail'
-            onChange={(e) => { handleInputChange(e, 'email'); }}
-            value={signUpData.email}
-            type='email'
-          />
-          <Input
-            name='Senha'
-            onChange={(e) => { handleInputChange(e, 'password'); }}
-            value={signUpData.password}
-            type='password'
-          />
-          <Input
-            name='Confirme a senha'
-            onChange={(e) => { handleInputChange(e, 'passwordConfirmation'); }}
-            value={signUpData.passwordConfirmation}
-            type='password'
-          />
-          <Button>Cadastrar</Button>
-        </FormStyled>
-      }
+      <FormStyled onSubmit={handleSubmit}>
+        <Input
+          loading={loading}
+          name='Nome'
+          onChange={(e) => { handleInputChange(e, 'name'); }}
+          value={signUpData.name}
+          type='text'
+        />
+        <Input
+          loading={loading}
+          name='E-mail'
+          onChange={(e) => { handleInputChange(e, 'email'); }}
+          value={signUpData.email}
+          type='email'
+        />
+        <Input
+          loading={loading}
+          name='Senha'
+          onChange={(e) => { handleInputChange(e, 'password'); }}
+          value={signUpData.password}
+          type='password'
+        />
+        <Input
+          loading={loading}
+          name='Confirme a senha'
+          onChange={(e) => { handleInputChange(e, 'passwordConfirmation'); }}
+          value={signUpData.passwordConfirmation}
+          type='password'
+        />
+        <Button type='submit' loading={loading}>Cadastrar</Button>
+      </FormStyled>
       <Link to='/'>
         <p>Já tem uma conta? Entre agora!</p>
       </Link>
