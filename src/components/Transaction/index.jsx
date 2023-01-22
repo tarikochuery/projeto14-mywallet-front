@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../providers/UserProvider';
 import { DateStyled, TransactionStyled, DescriptionStyled, ValueStyled, DeleteButtonContainer } from './style';
 
-export const Transaction = ({ transaction }) => {
+export const Transaction = ({ transaction, setLoading }) => {
   const navigate = useNavigate();
   const { date, description, value, type, id } = transaction;
   const { deleteTransaction, updateTransactions, updateTransactionByID } = useContext(UserContext);
@@ -13,11 +13,15 @@ export const Transaction = ({ transaction }) => {
     const deleteConfirm = window.confirm('Deseja realmente deletar essa transação?');
 
     if (!deleteConfirm) return;
-
+    setLoading(true);
     try {
       const { success, errors } = await deleteTransaction(id);
-      if (!success) return alert(errors);
+      if (!success) {
+        setLoading(false);
+        return alert(errors);
+      }
       await updateTransactions();
+      setLoading(false);
     } catch (error) {
       alert(error.message);
     }

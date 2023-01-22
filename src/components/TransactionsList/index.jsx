@@ -59,7 +59,7 @@ export const TransactionList = () => {
         <>
           <Transactions>
             {transactions.map(
-              (transaction, idx) => <Transaction transaction={transaction} key={idx} />
+              (transaction, idx) => <Transaction setLoading={setLoading} transaction={transaction} key={idx} />
             )}
           </Transactions>
           <BalanceContainer>
